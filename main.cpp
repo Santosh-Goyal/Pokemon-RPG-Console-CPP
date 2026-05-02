@@ -1,11 +1,50 @@
 #include <iostream>
+#include <string>
 using namespace std;
+
+enum class PokemonChoice {
+    Charmander = 1,
+    Bulbasaur,
+    Squirtle,
+    Pikachu
+};
+
+enum class PokeomonType {
+    Fire,
+    Grass,
+    Water,
+    Electric,
+    Bug,
+    Normal,
+    Poison,
+    Ground,
+    Flying,
+    Psychic,
+    Rock,
+    Fairy,
+    Ghost,
+    Dragon,
+    Steel,
+    Ice,
+    Dark,
+    Fighting
+};
+
+string pokemon_to_string(PokemonChoice pokemon) {
+    switch (pokemon) {
+        case PokemonChoice::Charmander: return "Charmander";
+        case PokemonChoice::Bulbasaur: return "Bulbasaur";
+        case PokemonChoice::Squirtle: return "Squirtle";
+        case PokemonChoice::Pikachu: return "Pikachu";
+        default: return "Unknown Pokemon";
+    }
+}
+
 
 int main() {
     string player_name;
-    string chosen_pokemon;
+    PokemonChoice chosen_pokemon;
     int choice;
-
 
     cout << "Professor Oak: Hello there! Welcome to the world of Pokemon!\n";
     cout << "Professor Oak: My name is Oak. People call me the Pokemon Professor!\n";
@@ -30,29 +69,29 @@ int main() {
 
     switch (choice) {
         case 1:
-            chosen_pokemon = "Charmander";
+            chosen_pokemon = PokemonChoice::Charmander;
             cout << "Professor Oak: A fiery choice! Charmander is yours!\n";
             break;
         case 2:
-            chosen_pokemon = "Bulbasaur";
+            chosen_pokemon = PokemonChoice::Bulbasaur;
             cout << "Professor Oak: A fine choice! Bulbasaur is always ready to "
                  "grow on you!\n";
             break;
         case 3:
-            chosen_pokemon = "Squirtle";
+            chosen_pokemon = PokemonChoice::Squirtle;
             cout << "Professor Oak: Splendid! Squirtle will keep you cool under "
                  "pressure!\n";
             break;
         default:
             cout << "Professor Oak: Hmm, that doesn't seem right. Let me choose "
                  "for you...\n";
-            chosen_pokemon = "Pikachu"; // Default if no valid choice is made
+            chosen_pokemon = PokemonChoice::Pikachu; // Default if no valid choice is made
             cout << "Professor Oak: Just kidding! Let's go with Pikachu, the "
                  "surprise guest!\n";
     }
 
     // Concluding the first chapter
-    cout << "Professor Oak: " << chosen_pokemon << " and you, "
+    cout << "Professor Oak: " << pokemon_to_string(chosen_pokemon) << " and you, "
             << player_name << ", are going to be the best of friends!\n";
     cout << "Professor Oak: Your journey begins now! Get ready to explore "
             "the vast world of Pokemon!\n";
