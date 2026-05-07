@@ -217,6 +217,55 @@ class ProfessorOak {
         }
 };
 
+void gameLoop(Player &player){
+    bool keepPlaying = true;
+    while (keepPlaying)
+    {
+        int action;
+        cout << "What would you like to do next?\n";
+        cout << "1. Battle Wild Pokemon\n";
+        cout << "2. Visit PokeCenter\n";
+        cout << "3. Challenge a Gym Leader\n";
+        cout << "4. Enter Pokemon League\n";
+        cout << "5. Quit Game\n";
+        cout << "Enter your choice: ";
+        cin >> action;
+
+        switch (action)
+        {
+            case 1:
+                cout << "You venture into the tall grass and encounter a wild Pokemon!\n";
+                WaitForEnter();
+                break;
+            case 2:
+                cout << "You visit the PokeCenter and heal your Pokemon.\n";
+                WaitForEnter();
+                break;
+            case 3:
+                cout << "You challenge a Gym Leader and battle for a badge!\n";
+                WaitForEnter();
+                break;
+            case 4:
+                cout << "You enter the Pokemon League and face off against the Elite Four!\n";
+                WaitForEnter();
+                break;
+            case 5:
+                cout << "Are you sure you want to quit? (y/n): ";
+                char quitChoice;
+                cin >> quitChoice;
+                if (quitChoice == 'y' || quitChoice == 'Y') {
+                    keepPlaying = false;
+                }
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+                WaitForEnter();
+        }
+    }
+    cout << "Goodbye, " << player.name << "! Thanks for playing!\n";
+    
+}
+
 int main() {
     ProfessorOak professor("Professor Oak");
 
@@ -227,6 +276,8 @@ int main() {
     professor.offerPokemonChoices(player);
 
     professor.explainMainQuest(player);
+
+    gameLoop(player);
 
     return 0;
 }
