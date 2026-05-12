@@ -3,8 +3,10 @@
 #include <limits>   
 #include "Player.hpp"
 #include "Pokemon.hpp"
+#include "ProfessorOak.hpp"
 #include "PokemonType.hpp"
 #include "PokemonChoice.hpp"
+#include "Game.hpp"
 #include "Utility.hpp"
 using namespace std;
 
@@ -100,7 +102,7 @@ string pokemon_to_string(PokemonChoice pokemon) {
 };
  */
 
- class ProfessorOak {
+/*  class ProfessorOak {
     public:
         string name;
 
@@ -180,9 +182,9 @@ string pokemon_to_string(PokemonChoice pokemon) {
             Utility::WaitForEnter();
             Utility::ClearScreen();
         }
-};
+}; */
 
-void gameLoop(Player &player){
+/* void gameLoop(Player &player){
     bool keepPlaying = true;
     while (keepPlaying)
     {
@@ -228,10 +230,10 @@ void gameLoop(Player &player){
         }
     }
     cout << "Goodbye, " << player.name << "! Thanks for playing!\n";
-    
-}
+} */
 
 int main() {
+    Game game;
     ProfessorOak professor("Professor Oak");
 
     Pokemon bulbasaur("Bulbasaur", PokemonType::Grass, 100);
@@ -242,7 +244,7 @@ int main() {
 
     professor.explainMainQuest(player);
 
-    gameLoop(player);
+    game.gameLoop(player);
     
     return 0;
 }
