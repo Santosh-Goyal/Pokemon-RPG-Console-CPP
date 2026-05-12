@@ -1,5 +1,3 @@
-#pragma once
-
 enum class PokemonType {
     Fire,
     Grass,
