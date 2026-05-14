@@ -1,7 +1,7 @@
-#include "ProfessorOak.hpp"
-#include "Utility.hpp"
-#include "Player.hpp"
-#include "iostream"
+#include "../../include/Character/ProfessorOak.hpp"
+#include "../../include/Utility/Utility.hpp"
+#include "../../include/Character/Player/Player.hpp"
+#include <iostream>
 using namespace std;
 
 ProfessorOak::ProfessorOak(std::string p_name) {
@@ -58,7 +58,7 @@ void ProfessorOak::explainMainQuest(Player& player) {
                 <<" course, keep your Pokemon healthy at the PokeCenter.\n";
     Utility::WaitForEnter();
 
-    cout << name << ": Along the way, you'll capture new Pokemon to strengthen your team. Just remember—there is"
+    cout << name << ": Along the way, you'll capture new Pokemon to strengthen your team. Just remember there is"
                 <<" a limit to how many Pokemon you can carry, so choose wisely!\n";
     Utility::WaitForEnter();
 

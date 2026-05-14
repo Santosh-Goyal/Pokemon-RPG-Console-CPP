@@ -1,6 +1,5 @@
 #include <string>
 using namespace std;
-
 class Pokemon;
 
 class Player{

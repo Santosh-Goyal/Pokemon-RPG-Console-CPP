@@ -1,10 +1,11 @@
 #include <iostream>
-#include "PokemonChoice.hpp"
-#include "Utility.hpp"
-#include "Player.hpp"
-#include "PokemonType.hpp"
-#include "Pokemon.hpp"
+#include "../../../include/Utility/Utility.hpp"
+#include "../../../include/Pokemon/PokemonChoice.hpp"
+#include "../../../include/Character/Player/Player.hpp"
+#include "../../../include/Pokemon/PokemonType.hpp"
+#include "../../../include/Pokemon/Pokemon.hpp"
 using namespace std;
+
 
 Player::Player() {
     name = "Unknown Trainer";
@@ -25,16 +26,16 @@ void Player::choosePokemon(int choice){
     switch((PokemonChoice(choice)))
     {
         case PokemonChoice::Charmander:
-            chosenPokemon = new Pokemon("Charmander", PokemonType::Fire, 100);
+            chosenPokemon = new Pokemon("Charmander", PokemonType::Fire, 100, 100, 30);
             break;
         case PokemonChoice::Bulbasaur:
-            chosenPokemon = new Pokemon("Bulbasaur", PokemonType::Grass, 100);
+            chosenPokemon = new Pokemon("Bulbasaur", PokemonType::Grass, 100, 100, 25);
             break;
         case PokemonChoice::Squirtle:
-            chosenPokemon = new Pokemon("Squirtle", PokemonType::Water, 100);
+            chosenPokemon = new Pokemon("Squirtle", PokemonType::Water, 100, 100, 28);
             break;
         default:
-            chosenPokemon = new Pokemon("Pikachu", PokemonType::Electric, 100);
+            chosenPokemon = new Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35);
     }
     cout << "Player " << name << " has chosen " << chosenPokemon->name << "!\n";
     Utility::WaitForEnter();
