@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <ctime>
-#include "WildEncounterManager.hpp"
+#include "../../include/Battle/WildEncounterManager.hpp"
 
 WildEncounterManager::WildEncounterManager() {
     // Seed the random number generator

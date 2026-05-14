@@ -1,10 +1,11 @@
 #include <iostream>
-#include "Game.hpp"
-#include "Utility.hpp"
-#include "Player.hpp"
-#include "Pokemon.hpp"
-#include "PokemonType.hpp"
-#include "WildEncounterManager.hpp"
+#include "../../include/Main/Game.hpp"
+#include "../../include/Utility/Utility.hpp"
+#include "../../include/Character/Player/Player.hpp"
+#include "../../include/Pokemon/Pokemon.hpp"
+#include "../../include/Pokemon/PokemonType.hpp"
+#include "../../include/Battle/BattleManager.hpp"
+#include "../../include/Battle/WildEncounterManager.hpp"
 using namespace std;
 
 
@@ -13,14 +14,14 @@ Game::Game() {
         "Forest",
         75,
         {
-            new Pokemon("Pidgey", PokemonType::Normal, 5),
-            new Pokemon("Rattata", PokemonType::Normal, 7),
-            new Pokemon("Caterpie", PokemonType::Bug, 4),
-            new Pokemon("Kakuna", PokemonType::Bug, 5),
-            new Pokemon("Weedle", PokemonType::Bug, 4),
-            new Pokemon("Metapod", PokemonType::Bug, 8),
-            new Pokemon("Oddish", PokemonType::Grass, 6),
-            new Pokemon("Gloom", PokemonType::Grass, 9)
+            new Pokemon("Pidgey", PokemonType::Normal, 100, 100, 25),
+            new Pokemon("Rattata", PokemonType::Normal, 90, 90, 20),
+            new Pokemon("Caterpie", PokemonType::Bug, 75, 75, 15),
+            new Pokemon("Kakuna", PokemonType::Bug, 80, 80, 20),
+            new Pokemon("Weedle", PokemonType::Bug, 85, 85, 25),
+            new Pokemon("Metapod", PokemonType::Bug, 95, 95, 30),
+            new Pokemon("Oddish", PokemonType::Grass, 70, 70, 20),
+            new Pokemon("Gloom", PokemonType::Grass, 90, 90, 25)
         }
     };
 
@@ -28,12 +29,12 @@ Game::Game() {
         "Mountain",
         50,
         {
-            new Pokemon("Geodude", PokemonType::Rock, 10),
-            new Pokemon("Onix", PokemonType::Rock, 15),
-            new Pokemon("Zubat", PokemonType::Poison, 8),
-            new Pokemon("Golbat", PokemonType::Poison, 12),
-            new Pokemon("Machop", PokemonType::Fighting, 9),
-            new Pokemon("Machoke", PokemonType::Fighting, 14)
+            new Pokemon("Geodude", PokemonType::Rock, 100, 100, 30),
+            new Pokemon("Onix", PokemonType::Rock, 70, 70, 25),
+            new Pokemon("Zubat", PokemonType::Poison, 75, 75, 20),
+            new Pokemon("Golbat", PokemonType::Poison, 80, 80, 25),
+            new Pokemon("Machop", PokemonType::Fighting, 90, 90, 30),
+            new Pokemon("Machoke", PokemonType::Fighting, 80, 80, 35)
         }
     };
 
@@ -41,12 +42,12 @@ Game::Game() {
         "Cave",
         25,
         {
-            new Pokemon("Zubat", PokemonType::Poison, 8),
-            new Pokemon("Golbat", PokemonType::Poison, 12),
-            new Pokemon("Geodude", PokemonType::Rock, 10),
-            new Pokemon("Onix", PokemonType::Rock, 15),
-            new Pokemon("Sandshrew", PokemonType::Ground, 7),
-            new Pokemon("Sandslash", PokemonType::Ground, 13)
+            new Pokemon("Zubat", PokemonType::Poison, 75, 75, 20),
+            new Pokemon("Golbat", PokemonType::Poison, 80, 80, 25),
+            new Pokemon("Geodude", PokemonType::Rock, 100, 100, 30),
+            new Pokemon("Onix", PokemonType::Rock, 70, 70, 25),
+            new Pokemon("Sandshrew", PokemonType::Ground, 70, 70, 20),
+            new Pokemon("Sandslash", PokemonType::Ground, 85, 85, 25)
         }
     };
 }
@@ -70,21 +71,23 @@ void Game::gameLoop(Player &player){
         cin >> action;
 
         Utility::ClearInputBuffer();
-
+        BattleManager battleManager;
         switch (action)
         {
             case 1:
             {
                 WildEncounterManager encounterManager;
-                const Pokemon* encounteredPokemon = encounterManager.getRandomPokemonFromGrass(*ForestGrass);
-                cout << "A wild " << encounteredPokemon->name << " appears!\n";
+                Pokemon* encounteredPokemon = new Pokemon(*encounterManager.getRandomPokemonFromGrass(*ForestGrass));
+                
+                battleManager.startBattle(*player.chosenPokemon, *encounteredPokemon);
 
-                Utility::WaitForEnter();
                 break;
             }
             case 2:
             {
                 cout << "You visit the PokeCenter and heal your Pokemon.\n";
+                player.chosenPokemon->heal();
+                cout << "Your " << player.chosenPokemon->name << " is now at full health!\n";
                 Utility::WaitForEnter();
                 break;
             }
