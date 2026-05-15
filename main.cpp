@@ -20,7 +20,6 @@ string pokemon_to_string(PokemonChoice pokemon) {
     }
 }
 
-
 int main() {
     Game game;
     ProfessorOak professor("Professor Oak");

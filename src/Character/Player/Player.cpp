@@ -18,7 +18,7 @@ Player::Player(string p_name, Pokemon* p_chosenPokemon) {
     name = p_name;
     chosenPokemon = p_chosenPokemon;
     cout << "A Player " << name << " has joined the world of pokemon with " 
-        << chosenPokemon->name << " as their partner!\n";
+        << chosenPokemon->getName() << " as their partner!\n";
     Utility::WaitForEnter();
 }
 
@@ -37,7 +37,7 @@ void Player::choosePokemon(int choice){
         default:
             chosenPokemon = new Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35);
     }
-    cout << "Player " << name << " has chosen " << chosenPokemon->name << "!\n";
+    cout << "Player " << name << " has chosen " << chosenPokemon->getName() << "!\n";
     Utility::WaitForEnter();
 }
 

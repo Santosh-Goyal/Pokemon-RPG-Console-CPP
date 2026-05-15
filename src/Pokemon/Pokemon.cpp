@@ -2,6 +2,32 @@
 #include "../../include/Pokemon/Pokemon.hpp"
 #include "../../include/Pokemon/PokemonType.hpp"
 
+int Pokemon::getHealth() const {
+    return health;
+}
+int Pokemon::getMaxHealth() const {
+    return maxHealth;
+}
+int Pokemon::getAttackPower() const {
+    return attackPower;
+}
+void Pokemon::setHealth(int newHealth) {
+    if(newHealth < 0) {
+        health = 0;
+    } else if (newHealth > maxHealth) {
+        health = maxHealth;
+    } else {
+        health = newHealth;
+    }
+}
+std::string Pokemon::getName() const {
+    return name;
+}
+
+PokemonType Pokemon::getType() const {
+    return type;
+}
+
 Pokemon::Pokemon(){
     name = "Unknown";
     type = PokemonType::Electric;
