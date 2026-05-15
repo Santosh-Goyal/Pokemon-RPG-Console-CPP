@@ -9,7 +9,7 @@ void BattleManager::startBattle(Pokemon &playerPokemon, Pokemon &wildPokemon){
     currentBattleState.playerTurn = true;
     currentBattleState.battleOver = false;
 
-    std::cout << "A wild " << wildPokemon.name << " appears!\n";
+    std::cout << "A wild " << wildPokemon.getName() << " appears!\n";
     battle();
 }
 
@@ -35,9 +35,9 @@ void BattleManager::battle(){
 
 void BattleManager::handleBattleOutcome(){
     if(currentBattleState.playerPokemon->isFainted())
-        std::cout << "Your " << currentBattleState.playerPokemon->name << " has fainted! You lost the battle.\n";
+        std::cout << "Your " << currentBattleState.playerPokemon->getName() << " has fainted! You lost the battle.\n";
     else
-        std::cout << "The wild " << currentBattleState.opponentPokemon->name << " has fainted! You won the battle.\n";
+        std::cout << "The wild " << currentBattleState.opponentPokemon->getName() << " has fainted! You won the battle.\n";
 }
 
 void BattleManager::updateBattleState(){

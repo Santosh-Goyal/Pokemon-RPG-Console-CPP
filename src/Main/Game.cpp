@@ -87,7 +87,7 @@ void Game::gameLoop(Player &player){
             {
                 cout << "You visit the PokeCenter and heal your Pokemon.\n";
                 player.chosenPokemon->heal();
-                cout << "Your " << player.chosenPokemon->name << " is now at full health!\n";
+                cout << "Your " << player.chosenPokemon->getName() << " is now at full health!\n";
                 Utility::WaitForEnter();
                 break;
             }

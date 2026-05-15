@@ -1,13 +1,22 @@
+#pragma once
 #include <string>
 
 enum class PokemonType;
 class Pokemon {
-    public:
+    protected:
         std::string name;
         PokemonType type;
         int health;
         int maxHealth;
         int attackPower;
+
+    public:
+        std::string getName() const;
+        PokemonType getType() const;
+        int getHealth() const;
+        int getMaxHealth() const;
+        int getAttackPower() const;
+        void setHealth(int newHealth);
 
         Pokemon();
 
