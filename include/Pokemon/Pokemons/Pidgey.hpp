@@ -9,6 +9,7 @@ class Pidgey : public Pokemon {
         void AirSlash(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Pidgey();
         ~Pidgey();
 };

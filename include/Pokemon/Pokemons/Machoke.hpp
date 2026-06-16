@@ -9,6 +9,7 @@ class Machoke : public Pokemon {
         void Submission(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Machoke();
         ~Machoke();
 };

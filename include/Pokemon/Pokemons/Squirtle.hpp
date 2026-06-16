@@ -9,6 +9,7 @@ class Squirtle : public Pokemon {
         void HydroPump(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Squirtle();
         ~Squirtle();
 };

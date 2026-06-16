@@ -52,12 +52,6 @@ Pokemon::Pokemon(const Pokemon &other) {
     attackPower = other.attackPower;
 }
 
-void Pokemon::attack(Pokemon &target) {
-    int damage = attackPower; // a random value based on level and type advantages (not implemented yet)
-    std::cout << name << " attacks " << target.name << " for " << damage << " damage!\n";
-    target.takeDamage(damage);
-}
-
 void Pokemon::takeDamage(int damage) {
     health -= damage;
     if (health < 0) {

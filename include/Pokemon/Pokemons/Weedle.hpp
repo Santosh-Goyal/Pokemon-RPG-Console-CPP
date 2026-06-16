@@ -9,6 +9,7 @@ class Weedle : public Pokemon {
         void PinMissile(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Weedle();
         ~Weedle();
 };

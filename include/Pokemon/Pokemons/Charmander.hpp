@@ -9,6 +9,7 @@ class Charmander : public Pokemon {
         void Flamethrower(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Charmander();
         ~Charmander();
 };

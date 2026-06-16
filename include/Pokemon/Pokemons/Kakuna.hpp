@@ -9,6 +9,7 @@ class Kakuna : public Pokemon {
         void NeedleArm(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Kakuna();
         ~Kakuna();
 };

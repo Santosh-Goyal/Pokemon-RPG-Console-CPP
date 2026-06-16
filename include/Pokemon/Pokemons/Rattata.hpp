@@ -9,6 +9,7 @@ class Rattata : public Pokemon {
         void Crunch(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Rattata();
         ~Rattata();
 };
