@@ -9,6 +9,7 @@ class Sandslash : public Pokemon {
         void SandstormClaw(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Sandslash();
         ~Sandslash();
 };

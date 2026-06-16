@@ -9,6 +9,7 @@ class Gloom : public Pokemon {
         void SolarBeam(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Gloom();
         ~Gloom();
 };

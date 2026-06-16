@@ -9,6 +9,7 @@ class Onix : public Pokemon {
         void StoneEdge(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Onix();
         ~Onix();
 };

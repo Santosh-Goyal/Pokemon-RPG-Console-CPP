@@ -21,16 +21,20 @@ string pokemon_to_string(PokemonChoice pokemon) {
 }
 
 int main() {
-    Game game;
-    ProfessorOak professor("Professor Oak");
-    Player player;
+    Game* game = new Game();
+    ProfessorOak* professor = new ProfessorOak("Professor Oak");
+    Player* player = new Player;
 
-    professor.greetPlayer();
-    professor.offerPokemonChoices(player);
+    professor->greetPlayer();
+    professor->offerPokemonChoices(*player);
 
-    professor.explainMainQuest(player);
+    professor->explainMainQuest(*player);
 
-    game.gameLoop(player);
-    
+    game->gameLoop(*player);
+
+    delete game;
+    delete professor;
+    delete player;
+
     return 0;
 }

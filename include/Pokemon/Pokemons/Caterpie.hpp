@@ -9,6 +9,7 @@ class Caterpie : public Pokemon {
         void SignalBeam(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Caterpie();
         ~Caterpie();
 };

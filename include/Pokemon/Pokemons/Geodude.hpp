@@ -9,6 +9,7 @@ class Geodude : public Pokemon {
         void StoneEdge(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Geodude();
         ~Geodude();
 };

@@ -9,6 +9,7 @@ class Machop : public Pokemon {
         void BrickBreak(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Machop();
         ~Machop();
 };

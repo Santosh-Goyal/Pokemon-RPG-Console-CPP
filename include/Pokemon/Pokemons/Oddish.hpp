@@ -9,6 +9,7 @@ class Oddish : public Pokemon {
         void SolarBeam(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Oddish();
         ~Oddish();
 };

@@ -9,6 +9,7 @@ class Zubat : public Pokemon {
         void AirCutter(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Zubat();
         ~Zubat();
 };

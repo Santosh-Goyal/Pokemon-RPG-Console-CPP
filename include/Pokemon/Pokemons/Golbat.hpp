@@ -9,6 +9,7 @@ class Golbat : public Pokemon {
         void PoisonFang(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Golbat();
         ~Golbat();
 };

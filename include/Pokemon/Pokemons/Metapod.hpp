@@ -9,6 +9,7 @@ class Metapod : public Pokemon {
         void IronDefense(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Metapod();
         ~Metapod();
 };

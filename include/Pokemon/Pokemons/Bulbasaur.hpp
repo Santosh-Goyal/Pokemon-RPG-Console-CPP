@@ -9,6 +9,7 @@ class Bulbasaur : public Pokemon {
         void SolarBeam(Pokemon &target);
     
     public:
+        void attack(Pokemon &target) override;
         Bulbasaur();
         ~Bulbasaur();
 };

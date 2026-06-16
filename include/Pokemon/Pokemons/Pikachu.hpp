@@ -9,6 +9,7 @@ class Pikachu : public Pokemon {
         void ElectroBall(Pokemon &target);
 
     public:
+        void attack(Pokemon &target) override;
         Pikachu();
         ~Pikachu();
 };
