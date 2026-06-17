@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Machoke.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Machoke::Machoke() : Pokemon("Machoke", PokemonType::Fighting, 120, 120, 34) {}
+
+void Machoke::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: KarateChop(target); break;
+        case 1: LowKick(target); break;
+        case 2: CrossChop(target); break;
+        case 3: Submission(target); break;
+    }
+}
 
 Machoke::~Machoke() {
     std::cout << "Machoke has been released back into the wild.\n";

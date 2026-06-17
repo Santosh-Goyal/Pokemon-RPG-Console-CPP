@@ -30,7 +30,7 @@ int main() {
 
     professor->explainMainQuest(*player);
 
-    game->gameLoop(*player);
+    game->gameLoop(player);
 
     delete game;
     delete professor;

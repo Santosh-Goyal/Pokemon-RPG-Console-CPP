@@ -4,24 +4,41 @@
 #include "../../include/Character/Player/Player.hpp"
 #include "../../include/Pokemon/Pokemon.hpp"
 #include "../../include/Pokemon/PokemonType.hpp"
+#include "../../include/Pokemon/Pokemons/Pidgey.hpp"
+#include "../../include/Pokemon/Pokemons/Rattata.hpp"
+#include "../../include/Pokemon/Pokemons/Sandshrew.hpp"
+#include "../../include/Pokemon/Pokemons/Sandslash.hpp"
+#include "../../include/Pokemon/Pokemons/Caterpie.hpp"
+#include "../../include/Pokemon/Pokemons/Kakuna.hpp"
+#include "../../include/Pokemon/Pokemons/Weedle.hpp"
+#include "../../include/Pokemon/Pokemons/Metapod.hpp"
+#include "../../include/Pokemon/Pokemons/Oddish.hpp"
+#include "../../include/Pokemon/Pokemons/Gloom.hpp"
+#include "../../include/Pokemon/Pokemons/Geodude.hpp"
+#include "../../include/Pokemon/Pokemons/Onix.hpp"
+#include "../../include/Pokemon/Pokemons/Zubat.hpp"
+#include "../../include/Pokemon/Pokemons/Golbat.hpp"
+#include "../../include/Pokemon/Pokemons/Machop.hpp"
+#include "../../include/Pokemon/Pokemons/Machoke.hpp"
 #include "../../include/Battle/BattleManager.hpp"
 #include "../../include/Battle/WildEncounterManager.hpp"
 using namespace std;
 
 
 Game::Game() {
+    Game::wildPokemon = nullptr;
     ForestGrass = new Grass{
         "Forest",
         75,
         {
-            new Pokemon("Pidgey", PokemonType::Normal, 100, 100, 25),
-            new Pokemon("Rattata", PokemonType::Normal, 90, 90, 20),
-            new Pokemon("Caterpie", PokemonType::Bug, 75, 75, 15),
-            new Pokemon("Kakuna", PokemonType::Bug, 80, 80, 20),
-            new Pokemon("Weedle", PokemonType::Bug, 85, 85, 25),
-            new Pokemon("Metapod", PokemonType::Bug, 95, 95, 30),
-            new Pokemon("Oddish", PokemonType::Grass, 70, 70, 20),
-            new Pokemon("Gloom", PokemonType::Grass, 90, 90, 25)
+            new Pidgey(),
+            new Rattata(),
+            new Caterpie(),
+            new Kakuna(),
+            new Weedle(),
+            new Metapod(),
+            new Oddish(),
+            new Gloom()
         }
     };
 
@@ -29,12 +46,12 @@ Game::Game() {
         "Mountain",
         50,
         {
-            new Pokemon("Geodude", PokemonType::Rock, 100, 100, 30),
-            new Pokemon("Onix", PokemonType::Rock, 70, 70, 25),
-            new Pokemon("Zubat", PokemonType::Poison, 75, 75, 20),
-            new Pokemon("Golbat", PokemonType::Poison, 80, 80, 25),
-            new Pokemon("Machop", PokemonType::Fighting, 90, 90, 30),
-            new Pokemon("Machoke", PokemonType::Fighting, 80, 80, 35)
+            new Geodude(),
+            new Onix(),
+            new Zubat(),
+            new Golbat(),
+            new Machop(),
+            new Machoke()
         }
     };
 
@@ -42,18 +59,22 @@ Game::Game() {
         "Cave",
         25,
         {
-            new Pokemon("Zubat", PokemonType::Poison, 75, 75, 20),
-            new Pokemon("Golbat", PokemonType::Poison, 80, 80, 25),
-            new Pokemon("Geodude", PokemonType::Rock, 100, 100, 30),
-            new Pokemon("Onix", PokemonType::Rock, 70, 70, 25),
-            new Pokemon("Sandshrew", PokemonType::Ground, 70, 70, 20),
-            new Pokemon("Sandslash", PokemonType::Ground, 85, 85, 25)
+            new Zubat(),
+            new Golbat(),
+            new Geodude(),
+            new Onix(),
+            new Sandshrew(),
+            new Sandslash()
         }
     };
 }
 
+Game::~Game(){
+    delete(wildPokemon);
+}
 
-void Game::gameLoop(Player &player){
+
+void Game::gameLoop(Player* player){
     
     int action;
     bool keepPlaying = true;
@@ -61,7 +82,7 @@ void Game::gameLoop(Player &player){
     while (keepPlaying)
     {
         Utility::ClearScreen();
-        cout << "What would you like to do next " << player.name << "?\n";
+        cout << "What would you like to do next " << player->name << "?\n";
         cout << "1. Battle Wild Pokemon\n";
         cout << "2. Visit PokeCenter\n";
         cout << "3. Challenge a Gym Leader\n";
@@ -77,17 +98,16 @@ void Game::gameLoop(Player &player){
             case 1:
             {
                 WildEncounterManager encounterManager;
-                Pokemon* encounteredPokemon = new Pokemon(*encounterManager.getRandomPokemonFromGrass(*ForestGrass));
-                
-                battleManager.startBattle(*player.chosenPokemon, *encounteredPokemon);
+                wildPokemon = encounterManager.getRandomPokemonFromGrass(*ForestGrass);
+                battleManager.startBattle(*player->chosenPokemon, *wildPokemon);
 
                 break;
             }
             case 2:
             {
                 cout << "You visit the PokeCenter and heal your Pokemon.\n";
-                player.chosenPokemon->heal();
-                cout << "Your " << player.chosenPokemon->getName() << " is now at full health!\n";
+                player->chosenPokemon->heal();
+                cout << "Your " << player->chosenPokemon->getName() << " is now at full health!\n";
                 Utility::WaitForEnter();
                 break;
             }
@@ -120,5 +140,5 @@ void Game::gameLoop(Player &player){
             }
         }
     }
-    cout << "Goodbye, " << player.name << "! Thanks for playing!\n";
+    cout << "Goodbye, " << player->name << "! Thanks for playing!\n";
 }

@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Rattata.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Rattata::Rattata() : Pokemon("Rattata", PokemonType::Normal, 88, 88, 25) {}
+
+void Rattata::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: QuickAttack(target); break;
+        case 1: Bite(target); break;
+        case 2: HyperFang(target); break;
+        case 3: Crunch(target); break;
+    }
+}
 
 Rattata::~Rattata() {
     std::cout << "Rattata has been released back into the wild.\n";

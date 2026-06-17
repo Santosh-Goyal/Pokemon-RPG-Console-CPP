@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Geodude.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Geodude::Geodude() : Pokemon("Geodude", PokemonType::Rock, 120, 120, 30) {}
+
+void Geodude::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: RockThrow(target); break;
+        case 1: Magnitude(target); break;
+        case 2: Rollout(target); break;
+        case 3: StoneEdge(target); break;
+    }
+}
 
 Geodude::~Geodude() {
     std::cout << "Geodude has been released back into the wild.\n";

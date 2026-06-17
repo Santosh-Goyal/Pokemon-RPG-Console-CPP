@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Metapod.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Metapod::Metapod() : Pokemon("Metapod", PokemonType::Bug, 100, 100, 14) {}
+
+void Metapod::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Tackle(target); break;
+        case 1: StringShot(target); break;
+        case 2: BugBite(target); break;
+        case 3: IronDefense(target); break;
+    }
+}
 
 Metapod::~Metapod() {
     std::cout << "Metapod has been released back into the wild.\n";

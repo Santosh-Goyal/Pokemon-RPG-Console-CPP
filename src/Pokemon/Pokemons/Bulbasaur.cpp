@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Bulbasaur.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Bulbasaur::Bulbasaur() : Pokemon("Bulbasaur", PokemonType::Grass, 105, 105, 27) {}
+
+void Bulbasaur::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: VineWhip(target); break;
+        case 1: RazorLeaf(target); break;
+        case 2: SeedBomb(target); break;
+        case 3: SolarBeam(target); break;
+    }
+}
 
 Bulbasaur::~Bulbasaur() {
     std::cout << "Bulbasaur has been released back into the wild.\n";

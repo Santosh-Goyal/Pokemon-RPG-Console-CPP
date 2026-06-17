@@ -8,7 +8,7 @@ class Player{
         Pokemon* chosenPokemon;
 
         Player();
-        Player(std::string p_name, Pokemon* p_chosenPokemon);
+        Player(std::string p_name);
         void choosePokemon(int choice);
         ~Player();
 };

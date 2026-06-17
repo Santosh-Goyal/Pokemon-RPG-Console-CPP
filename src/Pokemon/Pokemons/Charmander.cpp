@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Charmander.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Charmander::Charmander() : Pokemon("Charmander", PokemonType::Fire, 100, 100, 32) {}
+
+void Charmander::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Ember(target); break;
+        case 1: FlameBurst(target); break;
+        case 2: FireFang(target); break;
+        case 3: Flamethrower(target); break;
+    }
+}
 
 Charmander::~Charmander() {
     std::cout << "Charmander has been released back into the wild.\n";

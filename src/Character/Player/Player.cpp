@@ -4,21 +4,22 @@
 #include "../../../include/Character/Player/Player.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 #include "../../../include/Pokemon/Pokemon.hpp"
+#include "../../../include/Pokemon/Pokemons/Charmander.hpp"
+#include "../../../include/Pokemon/Pokemons/Bulbasaur.hpp"
+#include "../../../include/Pokemon/Pokemons/Squirtle.hpp"
+#include "../../../include/Pokemon/Pokemons/Pikachu.hpp"
 using namespace std;
 
 
 Player::Player() {
     name = "Unknown Trainer";
-    chosenPokemon =  new Pokemon();
     cout << "A new player named " << name << " has joined the world of pokemon!\n";
     Utility::WaitForEnter();
 }
 
-Player::Player(string p_name, Pokemon* p_chosenPokemon) {
+Player::Player(string p_name) {
     name = p_name;
-    chosenPokemon = p_chosenPokemon;
-    cout << "A Player " << name << " has joined the world of pokemon with " 
-        << chosenPokemon->getName() << " as their partner!\n";
+    cout << "A Player " << name << " has joined the world of pokemon!\n";
     Utility::WaitForEnter();
 }
 
@@ -26,16 +27,16 @@ void Player::choosePokemon(int choice){
     switch((PokemonChoice(choice)))
     {
         case PokemonChoice::Charmander:
-            chosenPokemon = new Pokemon("Charmander", PokemonType::Fire, 100, 100, 30);
+            chosenPokemon = new Charmander();
             break;
         case PokemonChoice::Bulbasaur:
-            chosenPokemon = new Pokemon("Bulbasaur", PokemonType::Grass, 100, 100, 25);
+            chosenPokemon = new Bulbasaur();
             break;
         case PokemonChoice::Squirtle:
-            chosenPokemon = new Pokemon("Squirtle", PokemonType::Water, 100, 100, 28);
+            chosenPokemon = new Squirtle();
             break;
         default:
-            chosenPokemon = new Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35);
+            chosenPokemon = new Pikachu();
     }
     cout << "Player " << name << " has chosen " << chosenPokemon->getName() << "!\n";
     Utility::WaitForEnter();
