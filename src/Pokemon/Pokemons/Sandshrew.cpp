@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Sandshrew.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Sandshrew::Sandshrew() : Pokemon("Sandshrew", PokemonType::Ground, 102, 102, 27) {}
+
+void Sandshrew::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: SandAttack(target); break;
+        case 1: Slash(target); break;
+        case 2: Dig(target); break;
+        case 3: Earthquake(target); break;
+    }
+}
 
 Sandshrew::~Sandshrew() {
     std::cout << "Sandshrew has been released back into the wild.\n";

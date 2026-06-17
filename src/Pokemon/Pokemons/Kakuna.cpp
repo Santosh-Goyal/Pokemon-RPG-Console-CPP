@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Kakuna.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Kakuna::Kakuna() : Pokemon("Kakuna", PokemonType::Bug, 105, 105, 16) {}
+
+void Kakuna::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: PoisonSting(target); break;
+        case 1: BugBite(target); break;
+        case 2: Venoshock(target); break;
+        case 3: NeedleArm(target); break;
+    }
+}
 
 Kakuna::~Kakuna() {
     std::cout << "Kakuna has been released back into the wild.\n";

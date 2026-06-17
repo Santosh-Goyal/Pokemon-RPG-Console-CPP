@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Golbat.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Golbat::Golbat() : Pokemon("Golbat", PokemonType::Flying, 100, 100, 31) {}
+
+void Golbat::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: WingAttack(target); break;
+        case 1: Bite(target); break;
+        case 2: AirSlash(target); break;
+        case 3: PoisonFang(target); break;
+    }
+}
 
 Golbat::~Golbat() {
     std::cout << "Golbat has been released back into the wild.\n";

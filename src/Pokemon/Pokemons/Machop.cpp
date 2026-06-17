@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Machop.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Machop::Machop() : Pokemon("Machop", PokemonType::Fighting, 105, 105, 29) {}
+
+void Machop::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: LowKick(target); break;
+        case 1: KarateChop(target); break;
+        case 2: SeismicToss(target); break;
+        case 3: BrickBreak(target); break;
+    }
+}
 
 Machop::~Machop() {
     std::cout << "Machop has been released back into the wild.\n";

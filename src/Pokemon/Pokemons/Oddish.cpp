@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Oddish.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Oddish::Oddish() : Pokemon("Oddish", PokemonType::Grass, 95, 95, 24) {}
+
+void Oddish::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Absorb(target); break;
+        case 1: Acid(target); break;
+        case 2: SleepPowder(target); break;
+        case 3: SolarBeam(target); break;
+    }
+}
 
 Oddish::~Oddish() {
     std::cout << "Oddish has been released back into the wild.\n";

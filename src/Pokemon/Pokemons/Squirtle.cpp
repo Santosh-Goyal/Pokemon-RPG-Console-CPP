@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Squirtle.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Squirtle::Squirtle() : Pokemon("Squirtle", PokemonType::Water, 110, 110, 28) {}
+
+void Squirtle::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: WaterGun(target); break;
+        case 1: BubbleBeam(target); break;
+        case 2: AquaTail(target); break;
+        case 3: HydroPump(target); break;
+    }
+}
 
 Squirtle::~Squirtle() {
     std::cout << "Squirtle has been released back into the wild.\n";

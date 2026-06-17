@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Pikachu.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Pikachu::Pikachu() : Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35) {}
+
+void Pikachu::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: ThunderShock(target); break;
+        case 1: Thunderbolt(target); break;
+        case 2: IronTail(target); break;
+        case 3: ElectroBall(target); break;
+    }
+}
 
 Pikachu::~Pikachu() {
     std::cout << "Pikachu has been released back into the wild.\n";

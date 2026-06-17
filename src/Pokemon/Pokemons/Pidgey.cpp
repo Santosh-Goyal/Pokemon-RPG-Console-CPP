@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Pidgey.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Pidgey::Pidgey() : Pokemon("Pidgey", PokemonType::Flying, 90, 90, 22) {}
+
+void Pidgey::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Gust(target); break;
+        case 1: QuickAttack(target); break;
+        case 2: WingAttack(target); break;
+        case 3: AirSlash(target); break;
+    }
+}
 
 Pidgey::~Pidgey() {
     std::cout << "Pidgey has been released back into the wild.\n";

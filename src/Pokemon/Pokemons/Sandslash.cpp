@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Sandslash.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Sandslash::Sandslash() : Pokemon("Sandslash", PokemonType::Ground, 118, 118, 32) {}
+
+void Sandslash::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Slash(target); break;
+        case 1: Dig(target); break;
+        case 2: Earthquake(target); break;
+        case 3: SandstormClaw(target); break;
+    }
+}
 
 Sandslash::~Sandslash() {
     std::cout << "Sandslash has been released back into the wild.\n";

@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Caterpie.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Caterpie::Caterpie() : Pokemon("Caterpie", PokemonType::Bug, 90, 90, 18) {}
+
+void Caterpie::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: Tackle(target); break;
+        case 1: StringShot(target); break;
+        case 2: BugBite(target); break;
+        case 3: SignalBeam(target); break;
+    }
+}
 
 Caterpie::~Caterpie() {
     std::cout << "Caterpie has been released back into the wild.\n";

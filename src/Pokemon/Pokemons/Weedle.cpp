@@ -1,8 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../../../include/Pokemon/Pokemons/Weedle.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
 Weedle::Weedle() : Pokemon("Weedle", PokemonType::Bug, 85, 85, 17) {}
+
+void Weedle::attack(Pokemon &target) {
+    int moveIndex = rand() % 4;
+    switch(moveIndex) {
+        case 0: PoisonSting(target); break;
+        case 1: StringShot(target); break;
+        case 2: BugBite(target); break;
+        case 3: PinMissile(target); break;
+    }
+}
 
 Weedle::~Weedle() {
     std::cout << "Weedle has been released back into the wild.\n";
