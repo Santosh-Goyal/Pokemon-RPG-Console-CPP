@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Weedle.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Weedle::Weedle() : Pokemon("Weedle", PokemonType::Bug, 85, 85, 17) {}
+Weedle::Weedle() : Pokemon("Weedle", PokemonType::Bug, 85, 85, 17) {
+    moves = {
+        {"Poison Sting", [this](Pokemon& t) { PoisonSting(t); }},
+        {"String Shot", [this](Pokemon& t) { StringShot(t); }},
+        {"Bug Bite", [this](Pokemon& t) { BugBite(t); }},
+        {"Pin Missile", [this](Pokemon& t) { PinMissile(t); }}
+    };
+}
 
 void Weedle::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: PoisonSting(target); break;

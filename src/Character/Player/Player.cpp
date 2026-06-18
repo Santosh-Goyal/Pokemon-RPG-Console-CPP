@@ -28,15 +28,19 @@ void Player::choosePokemon(int choice){
     {
         case PokemonChoice::Charmander:
             chosenPokemon = new Charmander();
+            chosenPokemon->setIsPlayerControlled(true);
             break;
         case PokemonChoice::Bulbasaur:
             chosenPokemon = new Bulbasaur();
+            chosenPokemon->setIsPlayerControlled(true);
             break;
         case PokemonChoice::Squirtle:
             chosenPokemon = new Squirtle();
+            chosenPokemon->setIsPlayerControlled(true);
             break;
         default:
             chosenPokemon = new Pikachu();
+            chosenPokemon->setIsPlayerControlled(true);
     }
     cout << "Player " << name << " has chosen " << chosenPokemon->getName() << "!\n";
     Utility::WaitForEnter();

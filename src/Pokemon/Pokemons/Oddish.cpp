@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Oddish.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Oddish::Oddish() : Pokemon("Oddish", PokemonType::Grass, 95, 95, 24) {}
+Oddish::Oddish() : Pokemon("Oddish", PokemonType::Grass, 95, 95, 24) {
+    moves = {
+        {"Absorb", [this](Pokemon& t) { Absorb(t); }},
+        {"Acid", [this](Pokemon& t) { Acid(t); }},
+        {"Sleep Powder", [this](Pokemon& t) { SleepPowder(t); }},
+        {"Solar Beam", [this](Pokemon& t) { SolarBeam(t); }}
+    };
+}
 
 void Oddish::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Absorb(target); break;

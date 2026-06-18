@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Metapod.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Metapod::Metapod() : Pokemon("Metapod", PokemonType::Bug, 100, 100, 14) {}
+Metapod::Metapod() : Pokemon("Metapod", PokemonType::Bug, 100, 100, 14) {
+    moves = {
+        {"Tackle", [this](Pokemon& t) { Tackle(t); }},
+        {"String Shot", [this](Pokemon& t) { StringShot(t); }},
+        {"Bug Bite", [this](Pokemon& t) { BugBite(t); }},
+        {"Iron Defense", [this](Pokemon& t) { IronDefense(t); }}
+    };
+}
 
 void Metapod::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Tackle(target); break;

@@ -2,33 +2,12 @@
 #include "../../include/Pokemon/Pokemon.hpp"
 #include "../../include/Pokemon/PokemonType.hpp"
 
-int Pokemon::getHealth() const {
-    return health;
-}
-int Pokemon::getMaxHealth() const {
-    return maxHealth;
-}
-int Pokemon::getAttackPower() const {
-    return attackPower;
-}
-void Pokemon::setHealth(int newHealth) {
-    if(newHealth < 0) {
-        health = 0;
-    } else if (newHealth > maxHealth) {
-        health = maxHealth;
-    } else {
-        health = newHealth;
-    }
-}
 std::string Pokemon::getName() const {
     return name;
 }
 
-PokemonType Pokemon::getType() const {
-    return type;
-}
-
 Pokemon::Pokemon(){
+    isPlayerControlled = false;
     name = "Unknown";
     type = PokemonType::Electric;
     health = 0;
@@ -38,6 +17,7 @@ Pokemon::Pokemon(){
 
 Pokemon::Pokemon(std::string p_name, PokemonType p_type, int p_health, int p_maxHealth, int p_attackPower) {
     name = p_name;
+    isPlayerControlled = false;
     type = p_type;
     health = p_health;
     maxHealth = p_maxHealth;
@@ -46,6 +26,7 @@ Pokemon::Pokemon(std::string p_name, PokemonType p_type, int p_health, int p_max
 
 Pokemon::Pokemon(const Pokemon &other) {
     name = other.name;
+    isPlayerControlled = false;
     type = other.type;
     health = other.health;
     maxHealth = other.maxHealth;
@@ -71,4 +52,41 @@ void Pokemon::heal() {
 
 Pokemon::~Pokemon() {
     std::cout << name << " has been released back into the wild.\n";
+}
+
+void Pokemon::PrintMoves() {
+    std::cout << name << "'s available moves:\n";
+    for (size_t i = 0; i < moves.size(); ++i) {
+        std::cout << i + 1 << ": " << moves[i].name << "\n";
+    }
+}
+
+void Pokemon::setIsPlayerControlled(bool value){
+    isPlayerControlled = value;
+}
+
+void Pokemon::SelectAndUseMove(Pokemon* target) {
+    PrintMoves();
+    int index = SelectMove();
+    
+    // This calls the custom subclass function automatically!
+    moves[index].execute(*target); 
+    
+    // Centralized post-move dialogues
+    if (target->isFainted()) {
+        std::cout << target->getName() << " fainted!\n";
+    } else {
+        std::cout << target->getName() << " has " << target->health << " HP left.\n";
+    }
+}
+
+int Pokemon::SelectMove() {
+    int choice;
+    std::cout << "Choose a move: ";
+    std::cin >> choice;
+    while (choice < 1 || choice > static_cast<int>(moves.size())) {
+        std::cout << "Invalid choice. Try again: ";
+        std::cin >> choice;
+    }
+    return choice - 1; // Zero-indexed
 }

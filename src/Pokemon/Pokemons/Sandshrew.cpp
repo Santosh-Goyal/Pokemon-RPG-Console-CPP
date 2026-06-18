@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Sandshrew.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Sandshrew::Sandshrew() : Pokemon("Sandshrew", PokemonType::Ground, 102, 102, 27) {}
+Sandshrew::Sandshrew() : Pokemon("Sandshrew", PokemonType::Ground, 102, 102, 27) {
+    moves = {
+        {"Sand Attack", [this](Pokemon& t) { SandAttack(t); }},
+        {"Slash", [this](Pokemon& t) { Slash(t); }},
+        {"Dig", [this](Pokemon& t) { Dig(t); }},
+        {"Earthquake", [this](Pokemon& t) { Earthquake(t); }}
+    };
+}
 
 void Sandshrew::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: SandAttack(target); break;

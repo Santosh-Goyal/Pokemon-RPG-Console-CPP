@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Pikachu.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Pikachu::Pikachu() : Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35) {}
+Pikachu::Pikachu() : Pokemon("Pikachu", PokemonType::Electric, 100, 100, 35) {
+    moves = {
+        {"Thunder Shock", [this](Pokemon& t) { ThunderShock(t); }},
+        {"Thunderbolt", [this](Pokemon& t) { Thunderbolt(t); }},
+        {"Iron Tail", [this](Pokemon& t) { IronTail(t); }},
+        {"Electro Ball", [this](Pokemon& t) { ElectroBall(t); }}
+    };
+}
 
 void Pikachu::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: ThunderShock(target); break;

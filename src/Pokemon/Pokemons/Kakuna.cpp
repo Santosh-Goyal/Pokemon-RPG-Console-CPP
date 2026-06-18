@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Kakuna.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Kakuna::Kakuna() : Pokemon("Kakuna", PokemonType::Bug, 105, 105, 16) {}
+Kakuna::Kakuna() : Pokemon("Kakuna", PokemonType::Bug, 105, 105, 16) {
+    moves = {
+        {"Poison Sting", [this](Pokemon& t) { PoisonSting(t); }},
+        {"Bug Bite", [this](Pokemon& t) { BugBite(t); }},
+        {"Venoshock", [this](Pokemon& t) { Venoshock(t); }},
+        {"Needle Arm", [this](Pokemon& t) { NeedleArm(t); }}
+    };
+}
 
 void Kakuna::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: PoisonSting(target); break;

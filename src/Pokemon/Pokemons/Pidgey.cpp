@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Pidgey.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Pidgey::Pidgey() : Pokemon("Pidgey", PokemonType::Flying, 90, 90, 22) {}
+Pidgey::Pidgey() : Pokemon("Pidgey", PokemonType::Flying, 90, 90, 22) {
+    moves = {
+        {"Gust", [this](Pokemon& t) { Gust(t); }},
+        {"Quick Attack", [this](Pokemon& t) { QuickAttack(t); }},
+        {"Wing Attack", [this](Pokemon& t) { WingAttack(t); }},
+        {"Air Slash", [this](Pokemon& t) { AirSlash(t); }}
+    };
+}
 
 void Pidgey::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Gust(target); break;

@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Golbat.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Golbat::Golbat() : Pokemon("Golbat", PokemonType::Flying, 100, 100, 31) {}
+Golbat::Golbat() : Pokemon("Golbat", PokemonType::Flying, 100, 100, 31) {
+    moves = {
+        {"Wing Attack", [this](Pokemon& t) { WingAttack(t); }},
+        {"Bite", [this](Pokemon& t) { Bite(t); }},
+        {"Air Slash", [this](Pokemon& t) { AirSlash(t); }},
+        {"Poison Fang", [this](Pokemon& t) { PoisonFang(t); }}
+    };
+}
 
 void Golbat::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: WingAttack(target); break;

@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Onix.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Onix::Onix() : Pokemon("Onix", PokemonType::Rock, 125, 125, 33) {}
+Onix::Onix() : Pokemon("Onix", PokemonType::Rock, 125, 125, 33) {
+    moves = {
+        {"Rock Throw", [this](Pokemon& t) { RockThrow(t); }},
+        {"Slam", [this](Pokemon& t) { Slam(t); }},
+        {"Sand Tomb", [this](Pokemon& t) { SandTomb(t); }},
+        {"Stone Edge", [this](Pokemon& t) { StoneEdge(t); }}
+    };
+}
 
 void Onix::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: RockThrow(target); break;
