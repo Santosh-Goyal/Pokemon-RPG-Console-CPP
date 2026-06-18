@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Zubat.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Zubat::Zubat() : Pokemon("Zubat", PokemonType::Flying, 92, 92, 23) {}
+Zubat::Zubat() : Pokemon("Zubat", PokemonType::Flying, 92, 92, 23) {
+    moves = {
+        {"Leech Life", [this](Pokemon& t) { LeechLife(t); }},
+        {"Bite", [this](Pokemon& t) { Bite(t); }},
+        {"Wing Attack", [this](Pokemon& t) { WingAttack(t); }},
+        {"Air Cutter", [this](Pokemon& t) { AirCutter(t); }}
+    };
+}
 
 void Zubat::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: LeechLife(target); break;

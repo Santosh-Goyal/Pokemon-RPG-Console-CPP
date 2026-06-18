@@ -33,7 +33,6 @@ void ProfessorOak::offerPokemonChoices(Player& player) {
     cout << name << ": So, which one will it be? Enter the number of your choice: ";
     cin >> choice;
     player.choosePokemon(choice);
-    Utility::WaitForEnter();
 }
 
 void ProfessorOak::explainMainQuest(Player& player) {

@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Gloom.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Gloom::Gloom() : Pokemon("Gloom", PokemonType::Grass, 100, 100, 26) {}
+Gloom::Gloom() : Pokemon("Gloom", PokemonType::Grass, 100, 100, 26) {
+    moves = {
+        {"Absorb", [this](Pokemon& t) { Absorb(t); }},
+        {"Acid", [this](Pokemon& t) { Acid(t); }},
+        {"Petal Dance", [this](Pokemon& t) { PetalDance(t); }},
+        {"Solar Beam", [this](Pokemon& t) { SolarBeam(t); }}
+    };
+}
 
 void Gloom::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Absorb(target); break;

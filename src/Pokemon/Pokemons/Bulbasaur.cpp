@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Bulbasaur.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Bulbasaur::Bulbasaur() : Pokemon("Bulbasaur", PokemonType::Grass, 105, 105, 27) {}
+Bulbasaur::Bulbasaur() : Pokemon("Bulbasaur", PokemonType::Grass, 105, 105, 27) {
+    moves = {
+        {"Vine Whip", [this](Pokemon& t) { VineWhip(t); }},
+        {"Razor Leaf", [this](Pokemon& t) { RazorLeaf(t); }},
+        {"Seed Bomb", [this](Pokemon& t) { SeedBomb(t); }},
+        {"Solar Beam", [this](Pokemon& t) { SolarBeam(t); }}
+    };
+}
 
 void Bulbasaur::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: VineWhip(target); break;

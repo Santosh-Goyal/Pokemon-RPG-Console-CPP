@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Geodude.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Geodude::Geodude() : Pokemon("Geodude", PokemonType::Rock, 120, 120, 30) {}
+Geodude::Geodude() : Pokemon("Geodude", PokemonType::Rock, 120, 120, 30) {
+    moves = {
+        {"Rock Throw", [this](Pokemon& t) { RockThrow(t); }},
+        {"Magnitude", [this](Pokemon& t) { Magnitude(t); }},
+        {"Rollout", [this](Pokemon& t) { Rollout(t); }},
+        {"Stone Edge", [this](Pokemon& t) { StoneEdge(t); }}
+    };
+}
 
 void Geodude::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: RockThrow(target); break;

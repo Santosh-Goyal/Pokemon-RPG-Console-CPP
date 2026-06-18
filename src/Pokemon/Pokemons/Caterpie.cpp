@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Caterpie.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Caterpie::Caterpie() : Pokemon("Caterpie", PokemonType::Bug, 90, 90, 18) {}
+Caterpie::Caterpie() : Pokemon("Caterpie", PokemonType::Bug, 90, 90, 18) {
+    moves = {
+        {"Tackle", [this](Pokemon& t) { Tackle(t); }},
+        {"String Shot", [this](Pokemon& t) { StringShot(t); }},
+        {"Bug Bite", [this](Pokemon& t) { BugBite(t); }},
+        {"Signal Beam", [this](Pokemon& t) { SignalBeam(t); }}
+    };
+}
 
 void Caterpie::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Tackle(target); break;

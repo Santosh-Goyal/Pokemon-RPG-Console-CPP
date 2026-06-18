@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Squirtle.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Squirtle::Squirtle() : Pokemon("Squirtle", PokemonType::Water, 110, 110, 28) {}
+Squirtle::Squirtle() : Pokemon("Squirtle", PokemonType::Water, 110, 110, 28) {
+    moves = {
+        {"Water Gun", [this](Pokemon& t) { WaterGun(t); }},
+        {"Bubble Beam", [this](Pokemon& t) { BubbleBeam(t); }},
+        {"Aqua Tail", [this](Pokemon& t) { AquaTail(t); }},
+        {"Hydro Pump", [this](Pokemon& t) { HydroPump(t); }}
+    };
+}
 
 void Squirtle::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: WaterGun(target); break;

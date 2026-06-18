@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Charmander.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Charmander::Charmander() : Pokemon("Charmander", PokemonType::Fire, 100, 100, 32) {}
+Charmander::Charmander() : Pokemon("Charmander", PokemonType::Fire, 100, 100, 32) {
+    moves = {
+        {"Ember", [this](Pokemon& t) { Ember(t); }},
+        {"Flame Burst", [this](Pokemon& t) { FlameBurst(t); }},
+        {"Fire Fang", [this](Pokemon& t) { FireFang(t); }},
+        {"Flamethrower", [this](Pokemon& t) { Flamethrower(t); }}
+    };
+}
 
 void Charmander::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: Ember(target); break;

@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Machop.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Machop::Machop() : Pokemon("Machop", PokemonType::Fighting, 105, 105, 29) {}
+Machop::Machop() : Pokemon("Machop", PokemonType::Fighting, 105, 105, 29) {
+    moves = {
+        {"Low Kick", [this](Pokemon& t) { LowKick(t); }},
+        {"Karate Chop", [this](Pokemon& t) { KarateChop(t); }},
+        {"Seismic Toss", [this](Pokemon& t) { SeismicToss(t); }},
+        {"Brick Break", [this](Pokemon& t) { BrickBreak(t); }}
+    };
+}
 
 void Machop::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: LowKick(target); break;

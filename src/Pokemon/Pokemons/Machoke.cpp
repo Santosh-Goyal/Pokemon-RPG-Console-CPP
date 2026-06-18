@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Machoke.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Machoke::Machoke() : Pokemon("Machoke", PokemonType::Fighting, 120, 120, 34) {}
+Machoke::Machoke() : Pokemon("Machoke", PokemonType::Fighting, 120, 120, 34) {
+    moves = {
+        {"Karate Chop", [this](Pokemon& t) { KarateChop(t); }},
+        {"Low Kick", [this](Pokemon& t) { LowKick(t); }},
+        {"Cross Chop", [this](Pokemon& t) { CrossChop(t); }},
+        {"Submission", [this](Pokemon& t) { Submission(t); }}
+    };
+}
 
 void Machoke::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: KarateChop(target); break;

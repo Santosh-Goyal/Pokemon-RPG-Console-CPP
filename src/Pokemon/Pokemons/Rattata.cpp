@@ -4,9 +4,21 @@
 #include "../../../include/Pokemon/Pokemons/Rattata.hpp"
 #include "../../../include/Pokemon/PokemonType.hpp"
 
-Rattata::Rattata() : Pokemon("Rattata", PokemonType::Normal, 88, 88, 25) {}
+Rattata::Rattata() : Pokemon("Rattata", PokemonType::Normal, 88, 88, 25) {
+    moves = {
+        {"Quick Attack", [this](Pokemon& t) { QuickAttack(t); }},
+        {"Bite", [this](Pokemon& t) { Bite(t); }},
+        {"Hyper Fang", [this](Pokemon& t) { HyperFang(t); }},
+        {"Crunch", [this](Pokemon& t) { Crunch(t); }}
+    };
+}
 
 void Rattata::attack(Pokemon &target) {
+    if(isPlayerControlled) {
+        std::cout << name << "'s turn to attack!\n";
+        SelectAndUseMove(&target);
+        return;
+    }
     int moveIndex = rand() % 4;
     switch(moveIndex) {
         case 0: QuickAttack(target); break;
