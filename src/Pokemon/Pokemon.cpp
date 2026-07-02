@@ -1,6 +1,14 @@
 #include <iostream>
 #include "../../include/Pokemon/Pokemon.hpp"
 #include "../../include/Pokemon/PokemonType.hpp"
+#include "../../include/Effects/IStatusEffect.hpp"
+#include "../../include/Effects/StatusEffects/StatusEffectType.hpp"
+#include "../../include/Effects/StatusEffects/ParalyzedEffect.hpp"
+#include "../../include/Effects/StatusEffects/BurnEffect.hpp"
+#include "../../include/Effects/StatusEffects/FreezeEffect.hpp"
+#include "../../include/Effects/StatusEffects/PoisonEffect.hpp"
+#include "../../include/Effects/StatusEffects/SleepEffect.hpp"
+#include "../../include/Effects/StatusEffects/ConfuseEffect.hpp"
 
 std::string Pokemon::getName() const {
     return name;
@@ -22,6 +30,7 @@ Pokemon::Pokemon(std::string p_name, PokemonType p_type, int p_health, int p_max
     health = p_health;
     maxHealth = p_maxHealth;
     attackPower = p_attackPower;
+    appliedStatusEffect = nullptr;
 }
 
 Pokemon::Pokemon(const Pokemon &other) {
@@ -65,7 +74,7 @@ void Pokemon::setIsPlayerControlled(bool value){
     isPlayerControlled = value;
 }
 
-void Pokemon::SelectAndUseMove(Pokemon* target) {
+int Pokemon::SelectAndUseMove(Pokemon* target) {
     PrintMoves();
     int index = SelectMove();
     
@@ -78,6 +87,7 @@ void Pokemon::SelectAndUseMove(Pokemon* target) {
     } else {
         std::cout << target->getName() << " has " << target->health << " HP left.\n";
     }
+    return index;
 }
 
 int Pokemon::SelectMove() {
@@ -89,4 +99,56 @@ int Pokemon::SelectMove() {
         std::cin >> choice;
     }
     return choice - 1; // Zero-indexed
+}
+
+bool Pokemon::canAttack() {
+    if (appliedStatusEffect != nullptr) {
+        std::cout << name << " is affected by " << appliedStatusEffect->getEffectName() << "!\n";
+        return appliedStatusEffect->turnEndEffect(this);
+    }
+    return true;
+}
+
+bool Pokemon::canApplyEffect() {
+    return appliedStatusEffect == nullptr;
+}
+
+void Pokemon::clearEffect() {
+    appliedStatusEffect = nullptr;
+}
+
+void Pokemon::applyStatusEffect(StatusEffectType effectToApply) {
+    if (canApplyEffect()) {
+        switch (effectToApply) {
+            case StatusEffectType::Burn:
+                appliedStatusEffect = new BurnEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            case StatusEffectType::Freeze:
+                appliedStatusEffect = new FreezeEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            case StatusEffectType::Paralyze:
+                appliedStatusEffect = new ParalyzedEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            case StatusEffectType::Poison:
+                appliedStatusEffect = new PoisonEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            case StatusEffectType::Sleep:
+                appliedStatusEffect = new SleepEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            case StatusEffectType::Confuse:
+                appliedStatusEffect = new ConfuseEffect();
+                appliedStatusEffect->applyEffect(this);
+                break;
+            default:
+                appliedStatusEffect = nullptr;
+                break;
+        }
+    } else {
+        std::cout << name << " is already affected by a status effect and cannot be affected by another one!\n";
+    }  
 }

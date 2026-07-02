@@ -3,7 +3,9 @@
 #include <functional>
 #include <vector>
 
+class IStatusEffect;
 class Pokemon;
+enum StatusEffectType;
 
 struct Move {
     std::string name;
@@ -19,6 +21,7 @@ class Pokemon {
         int health;
         int maxHealth;
         int attackPower;
+        IStatusEffect* appliedStatusEffect;
         std::vector<Move> moves;
 
     public:
@@ -33,7 +36,12 @@ class Pokemon {
         void heal();
         ~Pokemon();
     
-        void SelectAndUseMove(Pokemon* target);
+        int SelectAndUseMove(Pokemon* target);
         void PrintMoves();
         int SelectMove();
+
+        bool canAttack();
+        void clearEffect();
+        bool canApplyEffect();
+        void applyStatusEffect(StatusEffectType effectToApply);
 };

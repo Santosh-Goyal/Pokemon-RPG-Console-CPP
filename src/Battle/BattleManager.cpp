@@ -17,10 +17,10 @@ void BattleManager::battle(){
     // This function can be expanded to include more complex battle mechanics
     while(!currentBattleState.battleOver){
 
-        if(currentBattleState.playerTurn)
+        if(currentBattleState.playerTurn && currentBattleState.playerPokemon->canAttack())
             currentBattleState.playerPokemon->attack(*currentBattleState.opponentPokemon);
     
-        else
+        else if(currentBattleState.opponentPokemon->canAttack())
             currentBattleState.opponentPokemon->attack(*currentBattleState.playerPokemon);
             
 
